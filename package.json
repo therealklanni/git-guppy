@@ -1,0 +1,43 @@
+{
+  "name": "git-guppy",
+  "description": "Git-hook manager",
+  "version": "0.1.0",
+  "homepage": "https://github.com/therealklanni/git-guppy",
+  "author": {
+    "name": "Kevin Lanni",
+    "url": "https://github.com/therealklanni"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/therealklanni/git-guppy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/therealklanni/git-guppy/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/therealklanni/git-guppy/blob/master/LICENSE-MIT"
+    }
+  ],
+  "keywords": [
+    "git",
+    "git-hook",
+    "git-hooks",
+    "gulp"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "devDependencies": {
+    "chai": "~1.9.1",
+    "gulp": "^3.8.6",
+    "gulp-verb": "^0.3.0",
+    "mocha": "*",
+    "verb": "~0.2.6"
+  }
+}

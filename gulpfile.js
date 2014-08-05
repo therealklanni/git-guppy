@@ -12,6 +12,7 @@ gulp.task('verb', function () {
 
 guppy.stream('pre-commit')
   .pipe(jshint)
-  .pipe(jshint.reporter, stylish);
+  .pipe(jshint.reporter, stylish)
+  .pipe(jshint.reporter, 'fail');
 
 guppy.init(gulp);

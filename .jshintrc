@@ -17,6 +17,12 @@
     "before": true,
     "after": true,
     "describe": true,
-    "it": true
+    "it": true,
+    "exec": true,
+    "exit": true,
+    "echo": true,
+    "mv": true,
+    "cp": true,
+    "test": true
   }
 }

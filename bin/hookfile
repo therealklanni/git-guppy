@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+var spawn = require('child_process').spawn;
+var hookName = process.argv[1].split('/').pop();
+var hook = spawn('gulp', [hookName], { stdio: 'inherit' });
+
+// catch exceptions so node doesn't exit prematurely, leaving a runaway process
+process.on('uncaughtException', function (err) {
+  console.error(err.stack);
+  hook.kill('SIGHUP');
+});
+
+hook.on('close', function (code) {
+  process.exit(code);
+});

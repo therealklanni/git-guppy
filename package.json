@@ -1,7 +1,7 @@
 {
   "name": "git-guppy",
-  "description": "Git-hook manager",
-  "version": "0.1.0",
+  "description": "Git-hook integration for your Gulp workflows.",
+  "version": "0.2.0",
   "homepage": "https://github.com/therealklanni/git-guppy",
   "author": {
     "name": "Kevin Lanni",
@@ -24,7 +24,8 @@
     "git",
     "git-hook",
     "git-hooks",
-    "gulp"
+    "gulp",
+    "guppy"
   ],
   "main": "index.js",
   "engines": {

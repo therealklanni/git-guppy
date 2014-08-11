@@ -1,6 +1,6 @@
 {
   "name": "git-guppy",
-  "description": "Git-hook integration for your Gulp workflows.",
+  "description": "Simple git-hook integration for your gulp workflows.",
   "version": "0.2.1",
   "homepage": "https://github.com/therealklanni/git-guppy",
   "author": {

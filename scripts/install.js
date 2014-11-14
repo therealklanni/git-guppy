@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 require('shelljs/global');
-var realpath = require('fs').realpathSync;
+var realpath = __dirname;
 var gitRoot = exec('git rev-parse --show-toplevel').output.slice(0, -1);
 var hooksDir = gitRoot + '/.git/hooks/';
 var gitHooks = require('../lib/git-hooks');
@@ -14,7 +14,7 @@ gitHooks.forEach(function (hook) {
     mv(hookDest, hookDest + '.old');
   }
 
-  cp(realpath('./scripts/hookfile'), hookDest);
+  cp(realpath + "/hookfile", hookDest);
 
   if (test('-f', hookDest)) {
     echo(hook + ' installed successfully');

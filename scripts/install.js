@@ -27,18 +27,22 @@ if (gitHooks.length == 0) {
 gitHooks.forEach(function (hook) {
   var hookDest = hooksDir + hook;
 
-  if (test('-f', hookDest)) {
-    mv(hookDest, hookDest + '.old');
-  }
+  try {
+    if (test('-f', hookDest)) {
+      mv(hookDest, hookDest + '.old');
+    }
 
-  cp(realpath + "/hookfile", hookDest);
+    cp(realpath + "/hookfile", hookDest);
 
-  if (test('-f', hookDest)) {
-    echo(hook + ' installed successfully at ' + hookDest);
+    if (test('-f', hookDest)) {
+      echo(hook + ' installed successfully at ' + hookDest);
 
-  } else {
-    code = 1;
+    } else {
+      code = 1;
+    }
+  } catch (Exception) {
+    console.log("FATAL error while trying to install hook: %s", Exception);
   }
 });
 
-exit(code);
+exit(0);

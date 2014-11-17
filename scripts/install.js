@@ -34,7 +34,8 @@ gitHooks.forEach(function (hook) {
   cp(realpath + "/hookfile", hookDest);
 
   if (test('-f', hookDest)) {
-    echo(hook + ' installed successfully');
+    echo(hook + ' installed successfully at ' + hookDest);
+
   } else {
     code = 1;
   }

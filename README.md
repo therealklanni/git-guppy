@@ -61,7 +61,7 @@ is triggered, gulp will run its dependencies first.
 > This interface will be improved in the future.
 
 ```js
-guppy.tasks['pre-commit'].dep.push('foo');
+gulp.tasks['pre-commit'].dep.push('foo');
 ```
 
 ## Writing guppy-hooks

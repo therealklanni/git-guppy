@@ -44,6 +44,9 @@
     "gulp-verb": "^0.3.0",
     "jshint-stylish": "^0.4.0",
     "mocha": "*",
+    "proxyquire": "^1.1.0",
+    "sinon": "^1.12.1",
+    "sinon-chai": "^2.6.0",
     "verb": "~0.2.6"
   },
   "dependencies": {

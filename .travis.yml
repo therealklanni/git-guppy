@@ -4,3 +4,8 @@ node_js:
   - "0.10"
 notifications:
   email: false
+before_install:
+  - npm install -g gulp
+  - npm install
+script:
+  gulp unit

@@ -14,7 +14,7 @@ gulp.task('verb', function () {
 
 gulp.task('unit', function () {
   return gulp.src('test/guppy.tests.js', { read: false })
-    .pipe(mocha({ reporter: 'nyan' }));
+    .pipe(mocha({ reporter: 'spec' }));
 });
 
 guppy.stream('pre-commit')

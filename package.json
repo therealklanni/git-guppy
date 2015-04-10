@@ -25,6 +25,7 @@
     "git-hook",
     "git-hooks",
     "gulp",
+    "gulpplugin",
     "guppy"
   ],
   "main": "index.js",

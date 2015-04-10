@@ -1,7 +1,7 @@
 {
   "name": "git-guppy",
   "description": "Simple git-hook integration for your gulp workflows.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "https://github.com/therealklanni/git-guppy",
   "author": {
     "name": "Kevin Lanni",

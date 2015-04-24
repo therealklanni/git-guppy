@@ -33,8 +33,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha -R spec",
-    "postinstall": "scripts/install.js"
+    "test": "mocha -R spec"
   },
   "devDependencies": {
     "chai": "~1.9.1",

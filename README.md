@@ -1,4 +1,4 @@
-# git-guppy [![NPM version](https://badge.fury.io/js/git-guppy.png)](http://badge.fury.io/js/git-guppy) [![Build Status](https://travis-ci.org/therealklanni/git-guppy.svg)](https://travis-ci.org/therealklanni/git-guppy)
+# git-guppy [![NPM version](https://badge.fury.io/js/git-guppy.svg)](http://badge.fury.io/js/git-guppy) [![Build Status](https://travis-ci.org/therealklanni/git-guppy.svg?branch=master)](https://travis-ci.org/therealklanni/git-guppy)
 
 > Simple git-hook integration for your gulp workflows.
 
@@ -13,8 +13,6 @@ guppy leverages these powerful existing systems as its backbone, allowing guppy
 through interfaces you're already familiar with.
 
 ## Install
-Install with [npm](npmjs.org):
-
 ```bash
 npm i git-guppy --save-dev
 ```
@@ -29,56 +27,116 @@ The actual scripts that git will run to trigger guppy's hooks will be automatica
 installed to your `.git/hooks/` directory. These are just a wrapper for invoking 
 the gulp tasks that guppy registers.
 
-You can install *guppy-hooks* via `npm` just like any other package. *More details
-soon*
+Typically, a workflow can be added to your gulp tasks via a *guppy-hook*. A 
+guppy-hook is like a git-hook preconfigured for specific gulp workflows.
+
+You can install *guppy-hooks* via `npm` just like any other package. *Watch this
+space for details*
 
 ### gulp integration
 
-guppy uses [lazypipe](https://github.com/OverZealous/lazypipe) to create pipelines
-for git hooks. By requiring guppy into your `gulpfile.js`, you can easily integrate
-gulp workflows as part of your git-hooks.
+> :warning: **Stop!** If you are using a guppy-hook package, refer to the 
+documentation for that package. You do not need the steps below unless you are 
+adding custom guppy integration to your gulpfile or authoring your own guppy-hook
+package.
 
-When git triggers a hook, guppy initializes the pipeline with the relevant files.
+guppy exposes a few simple methods to help you superpower your git-hooks with
+your gulp tasks.
 
-The `stream` method allows you to tap into pipelines.
+Before you dive in, initialize guppy by passing in your gulp reference:
 
 ```js
-guppy.stream('pre-commit')
-  .pipe(jshint)
-  .pipe(jshint.reporter, stylish);
+var gulp = require('gulp');
+var guppy = require('git-guppy')(gulp);
 ```
 
-After setting up your pipelines, initialize guppy to register the guppy hooks as
-gulp tasks.
+Then simply define some gulp tasks whose names match whichever git-hooks you
+want to be triggerable by git.
 
 ```js
-guppy.init(gulp);
+gulp.task('pre-commit', function () {
+  // see below
+});
 ```
 
-Once registered, you can specify task dependencies for guppy hooks. If the hook 
-is triggered, gulp will run its dependencies first.
+*Note: if you are working directly with guppy rather than installing a guppy-hook
+you will need to manually install the associated git-hooks using the 
+[guppy-cli](https://github.com/therealklanni/guppy-cli) commandline tool.*
 
-> This interface will be improved in the future.
+#### guppy.src(*hookName[, fn]*)
+
+Pass in the name of the desired git-hook and get back related filenames. This
+will likely come in handy when you want to act on more than just the files
+related to the git-hook.
 
 ```js
-guppy.tasks['pre-commit'].dep.push('foo');
+// contrived example
+gulp.task('pre-commit', function () {
+  return gulp.src(guppy.src('pre-commit'))
+    .pipe(gulpFilter(['*.js']))
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter('fail'));
+});
+```
+
+If you pass the optional `fn` argument, it will be passed to `gulp.task()` as the
+task function, but the first argument will be the related filenames and gulp will
+provide its callback as the last argument.
+
+```js
+// less contrived example
+gulp.task('pre-commit', guppy.src('pre-commit', function (filesBeingCommitted) {
+  return gulp.src(filesBeingCommitted)
+    .pipe(gulpFilter(['*.js']))
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter('fail'));
+}));
+```
+
+#### guppy.stream(*hookName*)
+
+Pass in the name of the git-hook to produce a stream of the related files. If 
+you need to act only on the files related to the git-hook, this is the simplest
+approach.
+
+*Note that depending on the git-hook, you may be acting on files that differ from
+your working copy, such as those staged for commit (as with 'pre-commit' for 
+example), rather than the working copy. If you need to act on the working-copy 
+files, use `guppy.src()` instead.*
+
+```js
+gulp.task('pre-commit', function () {
+  return guppy.stream('pre-commit')
+    .pipe(gulpFilter(['*.js']))
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter('fail'));
+});
 ```
 
 ## Writing guppy-hooks
 
-*coming soon*
+*stay tuned*
 
 ## Author
-
 **Kevin Lanni**
- 
-+ [github/therealklanni](https://github.com/therealklanni)
-+ [twitter/therealklanni](http://twitter.com/therealklanni) 
+
+[github/therealklanni](https://github.com/therealklanni)
+[twitter/therealklanni](http://twitter.com/therealklanni)
 
 ## License
-Copyright (c) 2014 Kevin Lanni, contributors.  
-Released under the MIT license
+Copyright (c) 2015 Kevin Lanni
+Released under the MIT license.
 
 ***
 
-_This file was generated by [gulp-verb](https://github.com/assemble/gulp-verb) on November 21, 2014._
+_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on April 23, 2015._
+
+
+<!-- reflinks generated by verb-reflinks plugin -->
+
+[verb]: https://github.com/assemble/verb
+[template]: https://github.com/jonschlinkert/template
+[assemble]: http://assemble.io

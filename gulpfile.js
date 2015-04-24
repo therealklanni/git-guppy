@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var verb = require('gulp-verb');
-var guppy = require('./lib/guppy');
+var guppy = require('./lib/guppy')(gulp);
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var gulpFilter = require('gulp-filter');
@@ -17,10 +17,10 @@ gulp.task('unit', function () {
     .pipe(mocha({ reporter: 'spec' }));
 });
 
-guppy.stream('pre-commit')
-  .pipe(gulpFilter, ['*.js'])
-  .pipe(jshint)
-  .pipe(jshint.reporter, stylish)
-  .pipe(jshint.reporter, 'fail');
-
-guppy.init(gulp);
+gulp.task('pre-commit', guppy.src('pre-commit', function (toBeCommitted) {
+  gulp.src(toBeCommitted)
+    .pipe(gulpFilter, ['*.js'])
+    .pipe(jshint)
+    .pipe(jshint.reporter, stylish)
+    .pipe(jshint.reporter, 'fail');
+}));

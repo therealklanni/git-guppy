@@ -3,7 +3,7 @@
 var _ = require('lodash');
 var execSync = require('exec-sync');
 
-var hookArgs = process.env.HOOK_ARGS ? process.env.HOOK_ARGS.split('\u263a') : []
+var hookArgs = process.env.HOOK_ARGS ? process.env.HOOK_ARGS.split('\u263a') : [];
 
 function run(cmd) {
   return _.compact(execSync(cmd).split('\n'));
@@ -18,7 +18,7 @@ var getArgs = {
   'pre-applypatch': function () { return hookArgs[0]; },
   'post-checkout': function () { return hookArgs[0]; },
   'post-commit': function () { return hookArgs[0]; }
-}
+};
 
 module.exports = function (gulp) {
   return {

@@ -17,10 +17,19 @@ gulp.task('unit', function () {
     .pipe(mocha({ reporter: 'spec' }));
 });
 
-gulp.task('pre-commit', guppy.src('pre-commit', function (toBeCommitted) {
-  gulp.src(toBeCommitted)
+gulp.task('lint', function () {
+  return gulp.src('*.js')
     .pipe(gulpFilter(['*.js']))
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
     .pipe(jshint.reporter('fail'));
-}));
+});
+
+// This task will lint all files, then only the indexed changes
+gulp.task('pre-commit', ['lint'], function () {
+  guppy.stream('pre-commit')
+    .pipe(gulpFilter(['*.js']))
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter('fail'));
+});

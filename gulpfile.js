@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var verb = require('gulp-verb');
-var guppy = require('./lib/guppy')(gulp);
+var guppy = require('./')(gulp);
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var gulpFilter = require('gulp-filter');
@@ -19,8 +19,8 @@ gulp.task('unit', function () {
 
 gulp.task('pre-commit', guppy.src('pre-commit', function (toBeCommitted) {
   gulp.src(toBeCommitted)
-    .pipe(gulpFilter, ['*.js'])
-    .pipe(jshint)
-    .pipe(jshint.reporter, stylish)
-    .pipe(jshint.reporter, 'fail');
+    .pipe(gulpFilter(['*.js']))
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter('fail'));
 }));

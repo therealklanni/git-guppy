@@ -52,6 +52,7 @@
     "verb": "~0.2.6"
   },
   "dependencies": {
+    "exec-sync": "^0.1.6",
     "lodash": "^3.7.0"
   }
 }

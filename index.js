@@ -15,6 +15,7 @@ module.exports = function (gulp) {
     },
     src: function (name, fn) {
       var hook = getHook(name);
+      hook.src = hook.src || null;
 
       if (fn && typeof fn === 'function') {
         if (hook.extra) {

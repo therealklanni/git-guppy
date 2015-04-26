@@ -1,39 +1,32 @@
 'use strict';
 
-var _ = require('lodash');
-var execSync = require('exec-sync');
-
-var hookArgs = process.env.HOOK_ARGS ? process.env.HOOK_ARGS.split('\u263a') : [];
-
-function run(cmd) {
-  return _.compact(execSync(cmd).split('\n'));
-}
-
-var getArgs = {
-  'pre-commit': function () {
-    return run('git diff --cached --name-only --diff-filter=ACM');
-  },
-  'commit-msg': function () { return hookArgs[0]; },
-  'applypatch-msg': function () { return hookArgs[0]; },
-  'pre-applypatch': function () { return hookArgs[0]; },
-  'post-checkout': function () { return hookArgs[0]; },
-  'post-commit': function () { return hookArgs[0]; }
-};
+var getHook = require('./lib/get-hook.js');
 
 module.exports = function (gulp) {
   return {
     stream: function (name) {
-      return gulp.src(this.src(name));
-    },
-    src: function (name, fn) {
-      var args = getArgs[name]();
+      var hook = getHook(name);
 
-      if (fn && typeof fn === 'function') {
-        return fn.bind(fn, args);
+      if (!hook.stream) {
+        throw new Error('Hook not streamable: ' + name);
       }
 
-      return args;
+      return hook.stream(gulp);
+    },
+    src: function (name, fn) {
+      var hook = getHook(name);
+
+      if (fn && typeof fn === 'function') {
+        if (hook.extra) {
+          return fn.bind(fn, hook.src, hook.extra);
+        } else {
+          return fn.bind(fn, hook.src);
+        }
+      } else if (!hook.src) {
+        throw new Error('Hook has no source files, use guppy.src() as a callback: ' + name);
+      }
+
+      return hook.src;
     }
   };
-
 };

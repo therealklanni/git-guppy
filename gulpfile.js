@@ -18,7 +18,7 @@ gulp.task('unit', function () {
 });
 
 gulp.task('lint', function () {
-  return gulp.src('*.js')
+  return gulp.src(['*.js', 'lib/*.js'])
     .pipe(gulpFilter(['*.js']))
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
@@ -27,7 +27,7 @@ gulp.task('lint', function () {
 
 // This task will lint all files, then only the indexed changes
 gulp.task('pre-commit', ['lint'], function () {
-  guppy.stream('pre-commit')
+  return guppy.stream('pre-commit')
     .pipe(gulpFilter(['*.js']))
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))

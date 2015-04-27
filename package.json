@@ -52,6 +52,8 @@
   },
   "dependencies": {
     "exec-sync": "^0.1.6",
-    "lodash": "^3.7.0"
+    "lodash": "^3.7.0",
+    "map-stream": "0.0.5",
+    "strip-bom": "^1.0.0"
   }
 }

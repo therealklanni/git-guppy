@@ -1,4 +1,4 @@
-# git-guppy [![NPM version](https://badge.fury.io/js/git-guppy.svg)](http://badge.fury.io/js/git-guppy) [![Build Status](https://travis-ci.org/therealklanni/git-guppy.svg?branch=master)](https://travis-ci.org/therealklanni/git-guppy)
+# git-guppy [![NPM version](https://badge.fury.io/js/git-guppy.svg)](http://badge.fury.io/js/git-guppy) [![Build Status](https://travis-ci.org/therealklanni/git-guppy.svg?branch=master)](https://travis-ci.org/therealklanni/git-guppy) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/therealklanni/git-guppy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 > Simple git-hook integration for your gulp workflows.
 

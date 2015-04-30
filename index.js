@@ -1,6 +1,6 @@
 'use strict';
 
-var getHook = require('./lib/get-hook.js');
+var getHook = require('./lib/get-hook');
 
 module.exports = function (gulp) {
   return {
@@ -15,7 +15,6 @@ module.exports = function (gulp) {
     },
     src: function (name, fn) {
       var hook = getHook(name);
-      hook.src = hook.src || null;
 
       if (fn && typeof fn === 'function') {
         if (hook.extra) {

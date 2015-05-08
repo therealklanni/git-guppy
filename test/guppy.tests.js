@@ -1,3 +1,7 @@
+/* jshint expr: true */
+/* global beforeEach, describe, it */
+'use strict';
+
 var chai = require('chai');
 var expect = chai.expect;
 var sinon = require('sinon');
@@ -9,7 +13,7 @@ process.env.HOOK_ARGS = 'extra\u263aextra';
 var nextStub = sinon.stub();
 var pipeStub = sinon.stub()
   .callsArgWith(0, {
-    relative: 'relative'
+    path: 'path'
   }, nextStub);
 pipeStub.returns({ pipe: pipeStub });
 
@@ -21,14 +25,14 @@ var gulp = {
   src: gulpSrcStub
 };
 
-function mapThru(fn) { return fn; };
+function mapThru(fn) { return fn; }
 var execSyncStub = sinon.stub();
 execSyncStub.withArgs('git diff --cached --name-only --diff-filter=ACM')
-  .returns('index.js\ntest.js');
-execSyncStub.withArgs('git ls-files -s relative | awk \'{print $2}\'')
-  .returns('hash');
+  .returns({ output: 'index.js\ntest.js' });
+execSyncStub.withArgs('git ls-files -s path')
+  .returns({ output: 'some hash' });
 execSyncStub.withArgs('git cat-file blob hash')
-  .returns('file\ncontents');
+  .returns({ output: 'file\ncontents' });
 
 var guppy;
 
@@ -36,7 +40,7 @@ describe('guppy', function () {
   beforeEach(function () {
     guppy = proxy('../', {
       './lib/get-hook': proxy('../lib/get-hook', {
-        'exec-sync': execSyncStub,
+        'shelljs': { exec: execSyncStub },
         'map-stream': mapThru
       })
     })(gulp);
@@ -324,7 +328,7 @@ describe('guppy', function () {
 
         stream
           .pipe(function (file) {
-            expect(file.relative).to.equal('relative');
+            expect(file.path).to.equal('path');
             expect(execSyncStub).to.not.have.been.called;
             done();
           });
@@ -332,7 +336,7 @@ describe('guppy', function () {
     });
 
     describe('pre-commit', function () {
-      it('returns a vinyl stream from exec-sync return value', function (done) {
+      it('returns a vinyl stream from execSync return value', function (done) {
         var stream = guppy.stream('pre-commit');
 
         expect(guppy.stream).to.have.returned(sinon.match.object);
@@ -340,10 +344,10 @@ describe('guppy', function () {
 
         stream
           .pipe(function (file) {
-            expect(file.relative).to.equal('relative');
+            expect(file.path).to.equal('path');
             expect(Buffer.isBuffer(file.contents)).to.be.true;
             expect(file.contents.toString()).to.equal('file\ncontents');
-            expect(execSyncStub).to.have.been.calledWith('git ls-files -s relative | awk \'{print $2}\'');
+            expect(execSyncStub).to.have.been.calledWith('git ls-files -s path');
             expect(execSyncStub).to.have.been.calledWith('git cat-file blob hash');
             done();
           });

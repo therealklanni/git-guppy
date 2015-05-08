@@ -39,6 +39,7 @@
     "chai": "~1.9.1",
     "gulp": "^3.8.10",
     "gulp-filter": "^1.0.0",
+    "gulp-istanbul": "^0.8.1",
     "gulp-jshint": "^1.8.3",
     "gulp-load-plugins": "^0.10.0",
     "gulp-mocha": "^2.0.0",
@@ -52,9 +53,9 @@
     "verb": "~0.2.6"
   },
   "dependencies": {
-    "exec-sync": "^0.1.6",
-    "lodash": "^3.7.0",
+    "lodash": "^3.8.0",
     "map-stream": "0.0.5",
+    "shelljs": "^0.4.0",
     "strip-bom": "^1.0.0"
   }
 }

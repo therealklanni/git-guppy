@@ -33,7 +33,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "gulp unit"
   },
   "devDependencies": {
     "chai": "~1.9.1",

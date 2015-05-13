@@ -1,26 +1,32 @@
 var gulp = require('gulp');
-var verb = require('gulp-verb');
-var guppy = require('./lib/guppy');
-var jshint = require('gulp-jshint');
+var guppy = require('./')(gulp);
 var stylish = require('jshint-stylish');
-var gulpFilter = require('gulp-filter');
-var mocha = require('gulp-mocha');
+var $ = require('gulp-load-plugins')();
 
 gulp.task('verb', function () {
   gulp.src('.verbrc.md')
-    .pipe(verb({ dest: 'README.md' }))
+    .pipe($.verb({ dest: 'README.md' }))
     .pipe(gulp.dest('./'));
 });
 
 gulp.task('unit', function () {
   return gulp.src('test/guppy.tests.js', { read: false })
-    .pipe(mocha({ reporter: 'spec' }));
+    .pipe($.mocha());
 });
 
-guppy.stream('pre-commit')
-  .pipe(gulpFilter, ['*.js'])
-  .pipe(jshint)
-  .pipe(jshint.reporter, stylish)
-  .pipe(jshint.reporter, 'fail');
+gulp.task('lint', function () {
+  return gulp.src(['*.js', 'lib/*.js'])
+    .pipe($.filter(['*.js']))
+    .pipe($.jshint())
+    .pipe($.jshint.reporter(stylish))
+    .pipe($.jshint.reporter('fail'));
+});
 
-guppy.init(gulp);
+// run unit tests, then lint only the indexed changes
+gulp.task('pre-commit', ['unit'], function () {
+  return guppy.stream('pre-commit')
+    .pipe($.filter(['*.js']))
+    .pipe($.jshint())
+    .pipe($.jshint.reporter(stylish))
+    .pipe($.jshint.reporter('fail'));
+});

@@ -11,10 +11,13 @@ chai.use(require('sinon-chai'));
 process.env.HOOK_ARGS = 'extra\u263aextra';
 
 var nextStub = sinon.stub();
-var pipeStub = sinon.stub()
-  .callsArgWith(0, {
-    path: 'path'
-  }, nextStub);
+var pipeStub = sinon.stub();
+pipeStub.yields({
+  path: 'path'
+}, nextStub);
+pipeStub.onCall(4).yields({
+  path: 'untracked'
+}, nextStub);
 pipeStub.returns({ pipe: pipeStub });
 
 var gulpSrcStub = sinon.stub()
@@ -31,6 +34,8 @@ execSyncStub.withArgs('git diff --cached --name-only --diff-filter=ACM')
   .returns({ output: 'index.js\ntest.js' });
 execSyncStub.withArgs('git ls-files -s path')
   .returns({ output: 'some hash' });
+execSyncStub.withArgs('git ls-files -s untracked')
+  .returns({ output: '' });
 execSyncStub.withArgs('git cat-file blob hash')
   .returns({ output: 'file\ncontents' });
 
@@ -336,7 +341,7 @@ describe('guppy', function () {
     });
 
     describe('pre-commit', function () {
-      it('returns a vinyl stream from execSync return value', function (done) {
+      it('returns a vinyl stream from indexed changes', function (done) {
         var stream = guppy.stream('pre-commit');
 
         expect(guppy.stream).to.have.returned(sinon.match.object);
@@ -349,6 +354,21 @@ describe('guppy', function () {
             expect(file.contents.toString()).to.equal('file\ncontents');
             expect(execSyncStub).to.have.been.calledWith('git ls-files -s path');
             expect(execSyncStub).to.have.been.calledWith('git cat-file blob hash');
+            done();
+          });
+      });
+    });
+
+    describe('pre-commit untracked file', function () {
+      it('returns a vinyl stream from working copy', function (done) {
+        var stream = guppy.stream('pre-commit');
+
+        expect(guppy.stream).to.have.returned(sinon.match.object);
+        expect(guppy.stream.returnValues[0].pipe).to.be.defined;
+
+        stream
+          .pipe(function (file) {
+            expect(file.path).to.equal('untracked');
             done();
           });
       });

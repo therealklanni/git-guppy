@@ -354,5 +354,13 @@ describe('guppy', function () {
       });
     });
 
+    describe('post-applypatch', function () {
+      it('throws an exception "Hook not streamable"', function () {
+        try { guppy.stream('post-applypatch'); }
+        catch (e) { expect(guppy.stream.threw()).to.be.true; }
+        expect(guppy.stream.exceptions[0].message).to.equal('Hook not streamable: post-applypatch');
+      });
+    });
+
   });
 });

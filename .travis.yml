@@ -8,3 +8,6 @@ notifications:
 before_install:
   - npm install -g gulp
   - npm install
+  - pip install codecov
+after_success:
+  - codecov

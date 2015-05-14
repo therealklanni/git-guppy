@@ -10,15 +10,16 @@ chai.use(require('sinon-chai'));
 
 process.env.HOOK_ARGS = 'extra\u263aextra';
 
+var timesCalled = 0;
 var nextStub = sinon.stub();
 var pipeStub = sinon.stub();
-pipeStub.yields({
-  path: 'path'
-}, nextStub);
-pipeStub.onCall(5).yields({
-  path: 'untracked'
-}, nextStub);
 pipeStub.returns({ pipe: pipeStub });
+pipeStub.callsArgWith(0, {
+  // because Sinon's .onCall() method caused .return() to act buggy
+  get path () {
+    return (timesCalled++ === 4 || timesCalled === 6) ? 'untracked' : 'path';
+  }
+}, nextStub);
 
 var gulpSrcStub = sinon.stub()
   .returns({
@@ -29,6 +30,7 @@ var gulp = {
 };
 
 function mapThru(fn) { return fn; }
+
 var execSyncStub = sinon.stub();
 execSyncStub.withArgs('git diff --cached --name-only --diff-filter=ACM')
   .returns({ output: 'index.js\ntest.js' });

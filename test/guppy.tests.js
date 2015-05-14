@@ -15,7 +15,7 @@ var pipeStub = sinon.stub();
 pipeStub.yields({
   path: 'path'
 }, nextStub);
-pipeStub.onCall(4).yields({
+pipeStub.onCall(5).yields({
   path: 'untracked'
 }, nextStub);
 pipeStub.returns({ pipe: pipeStub });
@@ -340,6 +340,23 @@ describe('guppy', function () {
       });
     });
 
+    describe('commit-msg', function () {
+      it('returns a vinyl stream from a file', function (done) {
+        var stream = guppy.stream('commit-msg');
+
+        expect(gulp.src).to.have.been.calledWith('extra');
+        expect(guppy.stream).to.have.returned(sinon.match.object);
+        expect(guppy.stream.returnValues[0].pipe).to.be.defined;
+
+        stream
+          .pipe(function (file) {
+            expect(file.path).to.equal('path');
+            expect(execSyncStub).to.not.have.been.called;
+            done();
+          });
+      });
+    });
+
     describe('pre-commit', function () {
       it('returns a vinyl stream from indexed changes', function (done) {
         var stream = guppy.stream('pre-commit');
@@ -369,6 +386,23 @@ describe('guppy', function () {
         stream
           .pipe(function (file) {
             expect(file.path).to.equal('untracked');
+            done();
+          });
+      });
+    });
+
+    describe('prepare-commit-msg', function () {
+      it('returns a vinyl stream from a file', function (done) {
+        var stream = guppy.stream('prepare-commit-msg');
+
+        expect(gulp.src).to.have.been.calledWith('extra');
+        expect(guppy.stream).to.have.returned(sinon.match.object);
+        expect(guppy.stream.returnValues[0].pipe).to.be.defined;
+
+        stream
+          .pipe(function (file) {
+            expect(file.path).to.equal('path');
+            expect(execSyncStub).to.not.have.been.called;
             done();
           });
       });

@@ -8,6 +8,6 @@ notifications:
 before_install:
   - npm install -g gulp
   - npm install
-  - pip install codecov
+  - npm install codecov.io
 after_success:
-  - codecov
+  - "cat ./coverage/coverage-final.json | ./node_modules/codecov.io/bin/codecov.io.js"

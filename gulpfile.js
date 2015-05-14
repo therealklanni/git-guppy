@@ -9,9 +9,16 @@ gulp.task('verb', function () {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('unit', function () {
-  return gulp.src('test/guppy.tests.js', { read: false })
-    .pipe($.mocha());
+gulp.task('unit', function (cb) {
+  gulp.src(['index.js', 'lib/*.js'])
+    .pipe($.istanbul())
+    .pipe($.istanbul.hookRequire())
+    .on('finish', function () {
+      gulp.src('test/guppy.tests.js', { read: false })
+        .pipe($.mocha())
+        .pipe($.istanbul.writeReports())
+        .on('end', cb);
+    });
 });
 
 gulp.task('lint', function () {

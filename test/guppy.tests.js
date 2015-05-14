@@ -8,8 +8,6 @@ var sinon = require('sinon');
 var proxy = require('proxyquire');
 chai.use(require('sinon-chai'));
 
-process.env.HOOK_ARGS = 'extra\u263aextra';
-
 var timesCalled = 0;
 var nextStub = sinon.stub();
 var pipeStub = sinon.stub();
@@ -44,7 +42,16 @@ execSyncStub.withArgs('git cat-file blob hash')
 var guppy;
 
 describe('guppy', function () {
+  var testCount = 0;
+
   beforeEach(function () {
+    if (testCount++ === 5) {
+      // simulate no HOOK_ARGS for at least one test that doesn't expect them
+      delete process.env.HOOK_ARGS;
+    } else {
+      process.env.HOOK_ARGS = 'extra\u263aextra';
+    }
+
     guppy = proxy('../', {
       './lib/get-hook': proxy('../lib/get-hook', {
         'shelljs': { exec: execSyncStub },

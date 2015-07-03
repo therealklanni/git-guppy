@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Git-guppy by therealklanni</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Git-guppy</h1>
+      <h2 class="project-tagline">Git-hook integration for your gulp workflows; gulp-workflow integration for your git hooks.</h2>
+      <a href="https://github.com/therealklanni/git-guppy" class="btn">View on GitHub</a>
+      <a href="https://github.com/therealklanni/git-guppy/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/therealklanni/git-guppy/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="git-guppy----" class="anchor" href="#git-guppy----" aria-hidden="true"><span class="octicon octicon-link"></span></a>git-guppy <a href="http://badge.fury.io/js/git-guppy"><img src="https://badge.fury.io/js/git-guppy.svg" alt="NPM version"></a> <a href="https://travis-ci.org/therealklanni/git-guppy"><img src="https://travis-ci.org/therealklanni/git-guppy.svg?branch=master" alt="Build Status"></a> <a href="http://codecov.io/github/therealklanni/git-guppy?branch=master"><img src="http://codecov.io/github/therealklanni/git-guppy/coverage.svg?branch=master" alt="codecov.io"></a> <a href="https://gitter.im/therealklanni/git-guppy?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Join%20Chat.svg" alt="Gitter"></a>
+</h1>
+
+<blockquote>
+<p>Simple git-hook integration for your gulp workflows.</p>
+</blockquote>
+
+<p>guppy streamlines and extends your git-hooks by integrating them with your 
+<a href="http://gulpjs.com">gulp</a> workflow. This enables you to have <strong>gulp tasks that 
+run when triggered by a git-hook</strong>, which means you can do cool things like 
+abort a commit if your tests are failing. Git-hooks can now be managed through 
+<a href="https://npmjs.org">npm</a>, allowing them to automatically be installed and 
+updated. And because they integrate with gulp, it's easy to modify the workflow 
+and even combine hooks with your other gulp tasks.</p>
+
+<p>guppy leverages these powerful existing systems as its backbone, allowing guppy
+(and therefore your git-hooks) to remain as simple and lightweight as possible
+through interfaces you're already familiar with.</p>
+
+<p>A git-hook that lint-checks your code and makes sure your unit tests pass before 
+committing could be as simple as</p>
+
+<div class="highlight highlight-js"><pre>gulp.task(<span class="pl-s"><span class="pl-pds">'</span>pre-commit<span class="pl-pds">'</span></span>, [<span class="pl-s"><span class="pl-pds">'</span>lint<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>unit<span class="pl-pds">'</span></span>]);</pre></div>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<div class="highlight highlight-bash"><pre>npm i git-guppy --save-dev</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="git-integration" class="anchor" href="#git-integration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Git integration</h3>
+
+<p><em>Automatic!</em> </p>
+
+<p>The actual scripts that git will run to trigger guppy's hooks will be automatically
+installed to your <code>.git/hooks/</code> directory. These are just a wrapper for invoking 
+the gulp tasks that guppy registers.</p>
+
+<p>Typically, a workflow can be added to your gulp tasks via a <em>guppy-hook</em>. A 
+guppy-hook is like a git-hook preconfigured for specific gulp workflows.</p>
+
+<p>You can install <em>guppy-hooks</em> via <code>npm</code> just like any other package. For every valid
+git-hook name, there exists a "guppy-[hookname]" package that automatically installs
+the related hook to your <code>.git/hooks</code> dir, e.g. "guppy-pre-commit" or "guppy-post-update".
+Just add the guppy-hook you need as a dev-dependency in your project.</p>
+
+<p>Search <a href="https://www.npmjs.com/search?q=guppy-hook">"guppy-hook" on npm</a> to find all 
+guppy-hook packages. Or run <code>npm search guppy-hook</code> from the commandline.</p>
+
+<h3>
+<a id="gulp-integration" class="anchor" href="#gulp-integration" aria-hidden="true"><span class="octicon octicon-link"></span></a>gulp integration</h3>
+
+<blockquote>
+<p><img class="emoji" title=":warning:" alt=":warning:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" height="20" width="20" align="absmiddle"> <strong>Stop!</strong> If you are using a guppy-hook package, refer to the 
+documentation for that package. You do not need the steps below unless you are 
+adding custom guppy integration to your gulpfile or authoring your own guppy-hook
+package.</p>
+</blockquote>
+
+<p>guppy exposes a few simple methods to help you superpower your git-hooks with 
+gulp tasks.</p>
+
+<p>Before you dive in, initialize guppy by passing in your gulp reference:</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-k">var</span> gulp <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>gulp<span class="pl-pds">'</span></span>);
+<span class="pl-k">var</span> guppy <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>git-guppy<span class="pl-pds">'</span></span>)(gulp);</pre></div>
+
+<p>Then simply define some gulp tasks in your <code>gulpfile.js</code> whose names match 
+whichever git-hooks you want to be triggerable by git.</p>
+
+<div class="highlight highlight-js"><pre>gulp.task(<span class="pl-s"><span class="pl-pds">'</span>pre-commit<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> () {
+  <span class="pl-c">// see below</span>
+});</pre></div>
+
+<p><em>Note: if you are working directly with guppy rather than installing a guppy-hook
+you will need to manually install the associated git-hooks using the 
+<a href="https://github.com/therealklanni/guppy-cli">guppy-cli</a> commandline tool.</em></p>
+
+<h4>
+<a id="guppysrchookname" class="anchor" href="#guppysrchookname" aria-hidden="true"><span class="octicon octicon-link"></span></a>guppy.src(<em>hookName</em>)</h4>
+
+<blockquote>
+<p>Supported hooks: <code>applypatch-msg</code>, <code>commit-msg</code>, <code>pre-applypatch</code>, <code>pre-commit</code>,
+<code>prepare-commit-msg</code></p>
+</blockquote>
+
+<p>Pass in the name of the desired git-hook and get back the related filenames. 
+This allows you to work with the source file directly, for example to modify a 
+commit-msg programmatically or lint changed files. </p>
+
+<p><em>Note for pre-commit and pre-applypatch this will give you the *</em>working-copy*<em>, 
+not the indexed (staged) changes. If you want the indexed changes, use 
+<code>guppy.stream()</code> instead.</em></p>
+
+<div class="highlight highlight-js"><pre><span class="pl-c">// contrived example</span>
+gulp.task(<span class="pl-s"><span class="pl-pds">'</span>pre-commit<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> () {
+  <span class="pl-k">return</span> gulp.src(guppy.src(<span class="pl-s"><span class="pl-pds">'</span>pre-commit<span class="pl-pds">'</span></span>))
+    .pipe(gulpFilter([<span class="pl-s"><span class="pl-pds">'</span>*.js<span class="pl-pds">'</span></span>]))
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter(<span class="pl-s"><span class="pl-pds">'</span>fail<span class="pl-pds">'</span></span>));
+});</pre></div>
+
+<h4>
+<a id="guppysrchookname-fn" class="anchor" href="#guppysrchookname-fn" aria-hidden="true"><span class="octicon octicon-link"></span></a>guppy.src(<em>hookName, fn</em>)</h4>
+
+<blockquote>
+<p>Supported hooks: all</p>
+</blockquote>
+
+<p>If you pass the optional <code>fn</code> argument, it will be passed to <code>gulp.task()</code> as the
+task callback, but the first argument will be the related filenames (or <code>null</code>, 
+if none) and a second optional argument may also be supplied (when applicable) 
+with any additional arguments received from the git-hook as an array. gulp will 
+provide its callback as the last argument.</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-c">// less contrived example</span>
+gulp.task(<span class="pl-s"><span class="pl-pds">'</span>pre-commit<span class="pl-pds">'</span></span>, guppy.src(<span class="pl-s"><span class="pl-pds">'</span>pre-commit<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">filesBeingCommitted</span>) {
+  <span class="pl-k">return</span> gulp.src(filesBeingCommitted)
+    .pipe(gulpFilter([<span class="pl-s"><span class="pl-pds">'</span>*.js<span class="pl-pds">'</span></span>]))
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter(<span class="pl-s"><span class="pl-pds">'</span>fail<span class="pl-pds">'</span></span>));
+}));
+
+<span class="pl-c">// another contrived example</span>
+gulp.task(<span class="pl-s"><span class="pl-pds">'</span>pre-push<span class="pl-pds">'</span></span>, guppy.src(<span class="pl-s"><span class="pl-pds">'</span>pre-push<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">files</span>, <span class="pl-smi">extra</span>, <span class="pl-smi">cb</span>) {
+  <span class="pl-k">var</span> branch <span class="pl-k">=</span> execSync(<span class="pl-s"><span class="pl-pds">'</span>git rev-parse --abbrev-ref HEAD<span class="pl-pds">'</span></span>);
+
+  <span class="pl-k">if</span> (branch <span class="pl-k">===</span> <span class="pl-s"><span class="pl-pds">'</span>master<span class="pl-pds">'</span></span>) {
+    cb(<span class="pl-s"><span class="pl-pds">'</span>Don<span class="pl-cce">\'</span>t push master!<span class="pl-pds">'</span></span>)
+  } <span class="pl-k">else</span> {
+    cb();
+  }
+}));</pre></div>
+
+<h4>
+<a id="guppystreamhookname" class="anchor" href="#guppystreamhookname" aria-hidden="true"><span class="octicon octicon-link"></span></a>guppy.stream(<em>hookName</em>)</h4>
+
+<blockquote>
+<p>Supported hooks: <code>applypatch-msg</code>, <code>commit-msg</code>, <code>pre-applypatch</code>, <code>pre-commit</code>, 
+<code>prepare-commit-msg</code></p>
+</blockquote>
+
+<p>Pass in the name of the git-hook to produce a stream of the related files.</p>
+
+<p><em>Note that depending on the git-hook, you may be acting on files that differ from
+your working copy, such as those staged for commit (as with 'pre-commit' for 
+example), rather than the working copy. If you need to act on the working-copy 
+files, use <code>guppy.src()</code> instead.</em></p>
+
+<div class="highlight highlight-js"><pre>gulp.task(<span class="pl-s"><span class="pl-pds">'</span>pre-commit<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> () {
+  <span class="pl-k">return</span> guppy.stream(<span class="pl-s"><span class="pl-pds">'</span>pre-commit<span class="pl-pds">'</span></span>)
+    .pipe(gulpFilter([<span class="pl-s"><span class="pl-pds">'</span>*.js<span class="pl-pds">'</span></span>]))
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish))
+    .pipe(jshint.reporter(<span class="pl-s"><span class="pl-pds">'</span>fail<span class="pl-pds">'</span></span>));
+});</pre></div>
+
+<h4>
+<a id="additional-notes" class="anchor" href="#additional-notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Additional notes</h4>
+
+<p>For many git-hooks there are no files associated, so for those it makes sense 
+to only add other gulp tasks as dependencies to invoke a workflow, however some 
+will still receive some arguments (passed in by <code>guppy.src()</code> when used as a 
+callback) for more advanced use cases.</p>
+
+<div class="highlight highlight-js"><pre>gulp.task(<span class="pl-s"><span class="pl-pds">'</span>post-checkout<span class="pl-pds">'</span></span>, [<span class="pl-s"><span class="pl-pds">'</span>lint<span class="pl-pds">'</span></span>]);</pre></div>
+
+<h2>
+<a id="writing-guppy-hooks" class="anchor" href="#writing-guppy-hooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Writing guppy-hooks</h2>
+
+<p><em>stay tuned</em></p>
+
+<p>For details on what arguments each git-hook receives and what result a non-zero 
+exit status would have, check the <a href="https://git-scm.com/docs/githooks">git-scm docs</a>.</p>
+
+<h2>
+<a id="author" class="anchor" href="#author" aria-hidden="true"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<p><strong>Kevin Lanni</strong> <a href="https://github.com/therealklanni">github</a> <a href="http://twitter.com/therealklanni">twitter</a></p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Copyright (c) 2015 Kevin Lanni
+Released under the MIT license.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/therealklanni/git-guppy">Git-guppy</a> is maintained by <a href="https://github.com/therealklanni">therealklanni</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-62782014-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
+

@@ -40,8 +40,13 @@ the gulp tasks that guppy registers.
 Typically, a workflow can be added to your gulp tasks via a *guppy-hook*. A 
 guppy-hook is like a git-hook preconfigured for specific gulp workflows.
 
-You can install *guppy-hooks* via `npm` just like any other package. *Watch this
-space for details*
+You can install *guppy-hooks* via `npm` just like any other package. For every valid
+git-hook name, there exists a "guppy-[hookname]" package that automatically installs
+the related hook to your `.git/hooks` dir, e.g. "guppy-pre-commit" or "guppy-post-update".
+Just add the guppy-hook you need as a dev-dependency in your project.
+
+Search ["guppy-hook" on npm](https://www.npmjs.com/search?q=guppy-hook) to find all 
+guppy-hook packages. Or run `npm search guppy-hook` from the commandline.
 
 ### gulp integration
 

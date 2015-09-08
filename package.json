@@ -3,10 +3,7 @@
   "description": "Simple git-hook integration for your gulp workflows.",
   "version": "1.0.0",
   "homepage": "https://github.com/therealklanni/git-guppy",
-  "author": {
-    "name": "Kevin Lanni",
-    "url": "https://github.com/therealklanni"
-  },
+  "author": "Kevin Lanni (https://github.com/therealklanni)",
   "repository": {
     "type": "git",
     "url": "git://github.com/therealklanni/git-guppy.git"
@@ -50,5 +47,8 @@
     "map-stream": "0.0.5",
     "shelljs": "^0.4.0",
     "strip-bom": "^1.0.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }

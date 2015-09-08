@@ -49,8 +49,7 @@
     "mocha": "*",
     "proxyquire": "^1.1.0",
     "sinon": "^1.12.1",
-    "sinon-chai": "^2.6.0",
-    "verb": "~0.2.6"
+    "sinon-chai": "^2.6.0"
   },
   "dependencies": {
     "lodash": "^3.8.0",

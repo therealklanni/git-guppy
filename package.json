@@ -43,7 +43,7 @@
     "sinon-chai": "^2.6.0"
   },
   "dependencies": {
-    "lodash": "^3.8.0",
+    "lodash": "^4.0.1",
     "map-stream": "0.0.5",
     "shelljs": "^0.4.0",
     "strip-bom": "^1.0.0"

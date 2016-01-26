@@ -28,6 +28,7 @@ npm-debug.log
 /tmp/
 /vendor/
 _gh_pages
+coverage
 
 # OS or Editor folders
 *.esproj

@@ -251,6 +251,7 @@ describe('guppy', function () {
 
         expect(guppy.src).to.have.returned(sinon.match.func);
       });
+
     });
 
     describe('pre-push', function () {
@@ -397,6 +398,15 @@ describe('guppy', function () {
             expect(file.path).to.equal('untracked');
             done();
           });
+      });
+    });
+
+    describe('pre-commit gulp options', function () {
+      it('passes options to gulp.src', function () {
+        var options = { base: './' };
+        guppy.stream('pre-commit', options );
+
+        expect(  gulpSrcStub.lastCall.args[1] ).to.equal( options );
       });
     });
 

@@ -1,17 +1,18 @@
 'use strict';
 
 require('shelljs/global');
+var path = require('path');
 var gup = require('guppy-cli');
 var async = require('async');
-var pack = require(rootApplicationPath() + '/package.json');
-
-if (pack['guppy-hooks']) {
-  async.each(pack['guppy-hooks'], function (hook, next) {
-    gup.install(hook, null, next);
-  });
-}
 
 function rootApplicationPath() {
-  return exec('git rev-parse --show-toplevel', { silent: true })
-    .output.slice(0, -1);
+  return exec('git rev-parse --show-toplevel', { silent: true }).output;
+}
+
+var pkg = require(path.join(rootApplicationPath(), 'package.json'));
+
+if (pkg['guppy-hooks']) {
+  async.each(pkg['guppy-hooks'], function (hook, next) {
+    gup.install(hook, null, next);
+  });
 }

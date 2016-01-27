@@ -251,7 +251,6 @@ describe('guppy', function () {
 
         expect(guppy.src).to.have.returned(sinon.match.func);
       });
-
     });
 
     describe('pre-push', function () {
@@ -401,12 +400,12 @@ describe('guppy', function () {
       });
     });
 
-    describe('pre-commit gulp options', function () {
-      it('passes options to gulp.src', function () {
+    describe('guppy.stream with options', function () {
+      it('should pass options to gulp.src', function () {
         var options = { base: './' };
         guppy.stream('pre-commit', options );
 
-        expect(  gulpSrcStub.lastCall.args[1] ).to.equal( options );
+        expect(gulpSrcStub).to.have.been.calledWith(['index.js', 'test.js'], options);
       });
     });
 

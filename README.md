@@ -134,13 +134,14 @@ gulp.task('pre-push', guppy.src('pre-push', function (files, extra, cb) {
 }));
 ```
 
-#### guppy.stream(*hookName, options*)
+#### guppy.stream(*hookName[, options]*)
 
 > Supported hooks: `applypatch-msg`, `commit-msg`, `pre-applypatch`, `pre-commit`, 
 `prepare-commit-msg`
 
 Pass in the name of the git-hook to produce a stream of the related files. 
-If *options* object is provided, it will be passed down to gulp.src method. 
+You can pass options as a second argument, please refer to the [docs for gulp.src](https://github.com/gulpjs/gulp/blob/master/docs/API.md#gulpsrcglobs-options) 
+for more information on available options.
 
 *Note that depending on the git-hook, you may be acting on files that differ from
 your working copy, such as those staged for commit (as with 'pre-commit' for 
@@ -151,16 +152,6 @@ files, use `guppy.src()` instead.*
 gulp.task('pre-commit', function () {
   return guppy.stream('pre-commit')
     .pipe(gulpFilter(['*.js']))
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish))
-    .pipe(jshint.reporter('fail'));
-});
-```
-
-```js
-gulp.task('pre-commit', function () {
-  return guppy.stream('pre-commit', { base: './' })
-    .pipe(gulpFilter(['**/*.js']))
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
     .pipe(jshint.reporter('fail'));

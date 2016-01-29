@@ -1,12 +1,11 @@
 {
   "name": "git-guppy",
   "description": "Simple git-hook integration for your gulp workflows.",
-  "version": "1.0.1",
   "homepage": "https://github.com/therealklanni/git-guppy",
   "author": "Kevin Lanni (https://github.com/therealklanni)",
   "repository": {
     "type": "git",
-    "url": "git://github.com/therealklanni/git-guppy.git"
+    "url": "https://github.com/therealklanni/git-guppy.git"
   },
   "bugs": {
     "url": "https://github.com/therealklanni/git-guppy/issues"
@@ -25,7 +24,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "gulp unit"
+    "test": "gulp unit",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "devDependencies": {
     "chai": "~1.9.1",
@@ -40,7 +40,8 @@
     "mocha": "*",
     "proxyquire": "^1.1.0",
     "sinon": "^1.12.1",
-    "sinon-chai": "^2.6.0"
+    "sinon-chai": "^2.6.0",
+    "semantic-release": "^4.3.5"
   },
   "dependencies": {
     "lodash": "^3.8.0",

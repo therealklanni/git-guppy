@@ -24,8 +24,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "gulp unit",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "test": "gulp test",
   },
   "devDependencies": {
     "chai": "~1.9.1",

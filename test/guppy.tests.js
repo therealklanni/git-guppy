@@ -400,6 +400,15 @@ describe('guppy', function () {
       });
     });
 
+    describe('guppy.stream with options', function () {
+      it('should pass options to gulp.src', function () {
+        var options = { base: './' };
+        guppy.stream('pre-commit', options );
+
+        expect(gulpSrcStub).to.have.been.calledWith(['index.js', 'test.js'], options);
+      });
+    });
+
     describe('prepare-commit-msg', function () {
       it('returns a vinyl stream from a file', function (done) {
         var stream = guppy.stream('prepare-commit-msg');

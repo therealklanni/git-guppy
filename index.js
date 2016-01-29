@@ -4,14 +4,14 @@ var getHook = require('./lib/get-hook');
 
 module.exports = function (gulp) {
   return {
-    stream: function (name) {
+    stream: function (name, options) {
       var hook = getHook(name);
 
       if (!hook.stream) {
         throw new Error('Hook not streamable: ' + name);
       }
 
-      return hook.stream(gulp);
+      return hook.stream(gulp, options);
     },
     src: function (name, fn) {
       var hook = getHook(name);

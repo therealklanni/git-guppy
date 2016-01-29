@@ -24,8 +24,9 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
     "test": "gulp test",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "update": "updtr"
   },
   "devDependencies": {
     "chai": "~1.9.1",
@@ -39,9 +40,10 @@
     "jshint-stylish": "^0.4.0",
     "mocha": "*",
     "proxyquire": "^1.1.0",
+    "semantic-release": "^4.3.5",
     "sinon": "^1.12.1",
     "sinon-chai": "^2.6.0",
-    "semantic-release": "^4.3.5"
+    "updtr": "^0.1.7"
   },
   "dependencies": {
     "lodash": "^3.8.0",

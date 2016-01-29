@@ -28,7 +28,7 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "devDependencies": {
-    "chai": "~1.9.1",
+    "chai": "~3.5.0",
     "gulp": "^3.8.10",
     "gulp-filter": "^1.0.0",
     "gulp-istanbul": "^0.8.1",

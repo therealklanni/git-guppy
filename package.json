@@ -29,15 +29,16 @@
     "update": "updtr"
   },
   "devDependencies": {
-    "chai": "~1.9.1",
+    "chai": "^3.5.0",
     "gulp": "^3.8.10",
-    "gulp-filter": "^1.0.0",
-    "gulp-istanbul": "^0.8.1",
-    "gulp-jshint": "^1.8.3",
-    "gulp-load-plugins": "^0.10.0",
+    "gulp-filter": "^3.0.1",
+    "gulp-istanbul": "^0.10.3",
+    "gulp-jshint": "^2.0.0",
+    "gulp-load-plugins": "^1.2.0",
     "gulp-mocha": "^2.0.0",
-    "guppy-pre-commit": "^0.2.0",
-    "jshint-stylish": "^0.4.0",
+    "guppy-pre-commit": "^0.3.0",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0",
     "mocha": "*",
     "proxyquire": "^1.1.0",
     "semantic-release": "^4.3.5",
@@ -46,10 +47,10 @@
     "updtr": "^0.1.7"
   },
   "dependencies": {
-    "lodash": "^3.8.0",
-    "map-stream": "0.0.5",
-    "shelljs": "^0.4.0",
-    "strip-bom": "^1.0.0"
+    "lodash": "^3.10.1",
+    "map-stream": "0.0.6",
+    "shelljs": "^0.5.3",
+    "strip-bom": "^2.0.0"
   },
   "directories": {
     "test": "test"

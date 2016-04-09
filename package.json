@@ -30,9 +30,9 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "gulp": "^3.8.10",
-    "gulp-filter": "^3.0.1",
-    "gulp-istanbul": "^0.10.3",
+    "gulp": "^3.9.1",
+    "gulp-filter": "^4.0.0",
+    "gulp-istanbul": "^0.10.4",
     "gulp-jshint": "^2.0.0",
     "gulp-load-plugins": "^1.2.0",
     "gulp-mocha": "^2.0.0",
@@ -40,16 +40,16 @@
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
     "mocha": "*",
-    "proxyquire": "^1.1.0",
+    "proxyquire": "^1.7.4",
     "semantic-release": "^4.3.5",
     "sinon": "^1.12.1",
     "sinon-chai": "^2.6.0",
-    "updtr": "^0.1.7"
+    "updtr": "^0.1.10"
   },
   "dependencies": {
     "lodash": "^3.10.1",
     "map-stream": "0.0.6",
-    "shelljs": "^0.5.3",
+    "shelljs": "^0.6.0",
     "strip-bom": "^2.0.0"
   },
   "directories": {

@@ -1,5 +1,7 @@
 # git-guppy [![NPM version](https://badge.fury.io/js/git-guppy.svg)](http://badge.fury.io/js/git-guppy) [![Build Status](https://travis-ci.org/therealklanni/git-guppy.svg?branch=master)](https://travis-ci.org/therealklanni/git-guppy) [![codecov.io](http://codecov.io/github/therealklanni/git-guppy/coverage.svg?branch=master)](http://codecov.io/github/therealklanni/git-guppy?branch=master) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/therealklanni/git-guppy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
+![guppy](guppy.png)
+
 > Simple git-hook integration for your gulp workflows.
 
 guppy streamlines and extends your git-hooks by integrating them with your

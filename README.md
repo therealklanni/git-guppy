@@ -171,6 +171,17 @@ callback) for more advanced use cases.
 gulp.task('post-checkout', ['lint']);
 ```
 
+#### Important
+
+If your *gulpfile* and *.git* directory not in the same folder, `guppy.stream` and `guppy.src` won't return related files. If you need it, you should have node GITDIR variable to be set to absolute path to *.git* parent folder. You can do it inside your gulp task or at the top of your gulpfile like this:
+
+```js
+//Set path to git repository root folder
+var path = require('path');
+var gitParentDir = path.resolve(process.cwd(), '<path to your repository root folder>');
+process.env.GITDIR = process.env.GITDIR || gitParentDir;
+```
+
 ## Writing guppy-hooks
 
 *stay tuned*

@@ -44,7 +44,7 @@
     "semantic-release": "^4.3.5",
     "sinon": "^1.12.1",
     "sinon-chai": "^2.6.0",
-    "updtr": "^0.1.10"
+    "updtr": "^0.2.0"
   },
   "dependencies": {
     "lodash": "^3.10.1",

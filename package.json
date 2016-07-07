@@ -47,7 +47,7 @@
     "updtr": "^0.1.10"
   },
   "dependencies": {
-    "lodash": "^3.10.1",
+    "lodash": "^4.5.0",
     "map-stream": "0.0.6",
     "shelljs": "^0.6.0",
     "strip-bom": "^2.0.0"

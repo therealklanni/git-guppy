@@ -3,6 +3,9 @@
   "description": "Simple git-hook integration for your gulp workflows.",
   "homepage": "https://github.com/therealklanni/git-guppy",
   "author": "Kevin Lanni (https://github.com/therealklanni)",
+  "contributors": [
+    "Marcus R. Brown (https://github.com/igetgames)"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/therealklanni/git-guppy.git"

@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "find-parent-dir": "^0.3.0",
     "gulp": "^3.9.1",
     "gulp-filter": "^4.0.0",
     "gulp-istanbul": "^1.0.0",

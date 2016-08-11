@@ -3,6 +3,9 @@
   "description": "Simple git-hook integration for your gulp workflows.",
   "homepage": "https://github.com/therealklanni/git-guppy",
   "author": "Kevin Lanni (https://github.com/therealklanni)",
+  "contributors": [ {
+    "name": "Robert Fentress"
+  }],
   "repository": {
     "type": "git",
     "url": "https://github.com/therealklanni/git-guppy.git"
@@ -30,7 +33,9 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+
     "find-parent-dir": "^0.3.0",
+
     "gulp": "^3.9.1",
     "gulp-filter": "^4.0.0",
     "gulp-istanbul": "^1.0.0",

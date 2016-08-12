@@ -17,7 +17,7 @@ guppy leverages these powerful existing systems as its backbone, allowing guppy
 through interfaces you're already familiar with.
 
 A git-hook that lint-checks your code and makes sure your unit tests pass before
-committing could be as simple as
+committing could be as simple as 
 
 ```js
 gulp.task('pre-commit', ['lint', 'unit']);

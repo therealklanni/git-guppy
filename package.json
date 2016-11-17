@@ -41,7 +41,7 @@
     "jshint-stylish": "^2.1.0",
     "mocha": "*",
     "proxyquire": "^1.7.4",
-    "semantic-release": "^4.3.5",
+    "semantic-release": "^6.3.2",
     "sinon": "^1.12.1",
     "sinon-chai": "^2.6.0",
     "updtr": "^0.1.10"

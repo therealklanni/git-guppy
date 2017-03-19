@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "lodash": "^3.10.1",
-    "map-stream": "0.0.6",
+    "map-stream": "0.0.7",
     "shelljs": "^0.6.0",
     "strip-bom": "^2.0.0"
   },

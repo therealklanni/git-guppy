@@ -39,7 +39,7 @@
     "guppy-pre-commit": "^0.4.0",
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
-    "mocha": "*",
+    "mocha": "2.5.0",
     "proxyquire": "^1.7.4",
     "semantic-release": "^6.3.2",
     "sinon": "^2.1.0",

@@ -49,7 +49,7 @@
   "dependencies": {
     "lodash": "^4.17.4",
     "map-stream": "0.0.7",
-    "shelljs": "^0.6.0",
+    "shelljs": "^0.7.4",
     "strip-bom": "^2.0.0"
   },
   "directories": {

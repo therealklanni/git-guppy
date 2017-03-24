@@ -42,7 +42,7 @@
     "mocha": "*",
     "proxyquire": "^1.7.4",
     "semantic-release": "^4.3.5",
-    "sinon": "^1.12.1",
+    "sinon": "^2.0.0",
     "sinon-chai": "^2.6.0",
     "updtr": "^0.1.10"
   },

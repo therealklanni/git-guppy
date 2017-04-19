@@ -185,6 +185,10 @@ exit status would have, check the [git-scm docs](https://git-scm.com/docs/githoo
 + [github/therealklanni](https://github.com/therealklanni)
 + [twitter/therealklanni](http://twitter.com/therealklanni)
 
+## Contributor
+
+**Robert Fentress**
+
 ## License
 
 MIT © Kevin Lanni

@@ -1,4 +1,9 @@
-# git-guppy [![NPM version](https://badge.fury.io/js/git-guppy.svg)](http://badge.fury.io/js/git-guppy) [![Build Status](https://travis-ci.org/therealklanni/git-guppy.svg?branch=master)](https://travis-ci.org/therealklanni/git-guppy) [![codecov.io](http://codecov.io/github/therealklanni/git-guppy/coverage.svg?branch=master)](http://codecov.io/github/therealklanni/git-guppy?branch=master) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/therealklanni/git-guppy?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Travis](https://img.shields.io/travis/therealklanni/git-guppy.svg)](https://travis-ci.org/therealklanni/git-guppy)
+[![npm](https://img.shields.io/npm/v/git-guppy.svg)](https://npmjs.com/git-guppy)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![Beerpay](https://img.shields.io/beerpay/hashdog/scrapfy-chrome-extension.svg)](https://beerpay.io/therealklanni/git-guppy)
+
+# git-guppy
 
 ![guppy](guppy.png)
 

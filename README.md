@@ -23,7 +23,7 @@ guppy leverages these powerful existing systems as its backbone, allowing guppy
 through interfaces you're already familiar with.
 
 A git-hook that lint-checks your code and makes sure your unit tests pass before
-committing could be as simple as
+committing could be as simple as 
 
 ```js
 gulp.task('pre-commit', ['lint', 'unit']);
@@ -190,6 +190,10 @@ exit status would have, check the [git-scm docs](https://git-scm.com/docs/githoo
 
 + [github/therealklanni](https://github.com/therealklanni)
 + [twitter/therealklanni](http://twitter.com/therealklanni)
+
+## Contributor
+
+**Robert Fentress**
 
 ## License
 

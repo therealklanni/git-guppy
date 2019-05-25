@@ -29,7 +29,7 @@
     "update": "updtr"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.0.0",
     "gulp": "^3.9.1",
     "gulp-filter": "^5.0.0",
     "gulp-istanbul": "^1.0.0",

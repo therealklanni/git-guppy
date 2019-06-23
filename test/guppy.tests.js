@@ -6,6 +6,7 @@ var chai = require('chai');
 var expect = chai.expect;
 var sinon = require('sinon');
 var proxy = require('proxyquire');
+var path = require('path');
 chai.use(require('sinon-chai'));
 
 var timesCalled = 0;
@@ -29,8 +30,10 @@ var gulp = {
 
 function mapThru(fn) { return fn; }
 
-var execSyncStub = sinon.stub();
-execSyncStub.withArgs('git diff --cached --name-only --diff-filter=ACM')
+var gitParentDir = process.env.GITDIR || process.cwd(),
+    gitDir = path.resolve(gitParentDir, '.git'),
+    execSyncStub = sinon.stub();
+execSyncStub.withArgs('git --git-dir=' + gitDir + ' diff --cached --name-only --diff-filter=ACM')
   .returns({ output: 'index.js\ntest.js' });
 execSyncStub.withArgs('git ls-files -s path')
   .returns({ output: 'some hash' });
@@ -216,7 +219,7 @@ describe('guppy', function () {
           expect(files).to.eql(['index.js', 'test.js']);
           expect(cb).to.equal('gulp done callback');
 
-          expect(execSyncStub).to.have.been.calledWith('git diff --cached --name-only --diff-filter=ACM');
+          expect(execSyncStub).to.have.been.calledWith('git --git-dir=' + gitDir + ' diff --cached --name-only --diff-filter=ACM');
 
           done();
         })('gulp done callback');
@@ -244,7 +247,7 @@ describe('guppy', function () {
           expect(files).to.eql(['index.js', 'test.js']);
           expect(cb).to.equal('gulp done callback');
 
-          expect(execSyncStub).to.have.been.calledWith('git diff --cached --name-only --diff-filter=ACM');
+          expect(execSyncStub).to.have.been.calledWith('git --git-dir=' + gitDir + ' diff --cached --name-only --diff-filter=ACM');
 
           done();
         })('gulp done callback');
